@@ -1,7 +1,8 @@
-import { Theme } from 'react-native-elements';
+import { createTheme } from '@rneui/themed';
 
-export const theme: Partial<Theme> = {
-  colors: {
+export const theme = createTheme({
+  mode: 'light',
+  lightColors: {
     primary: '#1890ff',
     secondary: '#f5222d',
     success: '#52c41a',
@@ -11,15 +12,17 @@ export const theme: Partial<Theme> = {
     grey5: '#d9d9d9',
     white: '#ffffff'
   },
-  Button: {
-    raised: true,
-    buttonStyle: {
-      borderRadius: 8
-    }
-  },
-  Input: {
-    containerStyle: {
-      paddingHorizontal: 0
+  components: {
+    Button: {
+      raised: true,
+      buttonStyle: {
+        borderRadius: 8
+      }
+    },
+    Input: {
+      containerStyle: {
+        paddingHorizontal: 0
+      }
     }
   }
-};
+});
