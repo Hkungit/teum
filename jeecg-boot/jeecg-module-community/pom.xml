@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>jeecg-boot-parent</artifactId>
+        <groupId>org.jeecgframework.boot</groupId>
+        <version>3.7.2</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>jeecg-module-community</artifactId>
+    <packaging>pom</packaging>
+    
+    <modules>
+        <module>jeecg-module-community-api</module>
+        <module>jeecg-module-community-biz</module>
+    </modules>
+
+    <name>jeecg-module-community</name>
+    <description>社区模块</description>
+
+    <dependencies>
+        <!-- jeecg-boot-base-core -->
+        <dependency>
+            <groupId>org.jeecgframework.boot</groupId>
+            <artifactId>jeecg-boot-base-core</artifactId>
+        </dependency>
+        
+        <!-- system管理模块 -->
+        <dependency>
+            <groupId>org.jeecgframework.boot</groupId>
+            <artifactId>jeecg-system-local-api</artifactId>
+        </dependency>
+
+    </dependencies>
+</project> 

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>jeecg-module-system</artifactId>
+        <groupId>org.jeecgframework.boot</groupId>
+        <version>3.7.2</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>jeecg-system-start</artifactId>
+    
+    <dependencies>
+        <!-- SYSTEM 系统管理模块 -->
+        <dependency>
+            <groupId>org.jeecgframework.boot</groupId>
+            <artifactId>jeecg-system-biz</artifactId>
+            <version>${jeecgboot.version}</version>
+        </dependency>
+        <!-- DEMO 示例模块 -->
+        <dependency>
+            <groupId>org.jeecgframework.boot</groupId>
+            <artifactId>jeecg-module-demo</artifactId>
+            <version>${jeecgboot.version}</version>
+        </dependency>
+        
+        <!-- MALL 商城模块 -->
+        <dependency>
+            <groupId>org.jeecgframework.boot</groupId>
+            <artifactId>jeecg-module-mall-biz</artifactId>
+            <version>${jeecgboot.version}</version>
+        </dependency>
+
+        <!-- community 社区模块 -->
+        <dependency>
+            <groupId>org.jeecgframework.boot</groupId>
+            <artifactId>jeecg-module-community-biz</artifactId>
+            <version>${jeecgboot.version}</version>
+        </dependency>
+        
+        <!-- flyway 数据库自动升级 -->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                    <!-- 解决命令行过长的问题 -->
+                    <executable>true</executable>
+                    <jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
+                    <mainClass>org.jeecg.JeecgSystemApplication</mainClass>
+                    <layout>ZIP</layout>
+                    <useTestClasspath>false</useTestClasspath>
+                    <!-- 解决长命令行问题 -->
+                    <classpathLayoutType>LAYERED_JAR</classpathLayoutType>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>exec</classifier>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
