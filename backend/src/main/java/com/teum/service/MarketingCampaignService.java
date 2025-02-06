@@ -1,6 +1,7 @@
 package com.teum.service;
 
 import com.teum.model.MarketingCampaign;
+import org.springframework.cache.annotation.Cacheable;
 import com.teum.repository.MarketingCampaignRepository;
 import com.teum.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class MarketingCampaignService {
             .orElseThrow(() -> new ResourceNotFoundException("Campaign not found with id: " + id));
     }
 
+    @Cacheable(value = "activePromotions")
     public Page<MarketingCampaign> getActiveCampaigns(Pageable pageable) {
         return campaignRepository.findActiveCampaigns(LocalDateTime.now(), pageable);
     }

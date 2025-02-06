@@ -1,6 +1,7 @@
 package com.teum.service;
 
 import com.teum.model.Content;
+import org.springframework.cache.annotation.Cacheable;
 import com.teum.model.ContentType;
 import com.teum.repository.ContentRepository;
 import com.teum.exception.ResourceNotFoundException;
@@ -25,6 +26,7 @@ public class ContentService {
             .orElseThrow(() -> new ResourceNotFoundException("Content not found with id: " + id));
     }
 
+    @Cacheable(value = "publishedContent")
     public Page<Content> getPublishedContent(Pageable pageable) {
         return contentRepository.findByPublishedTrue(pageable);
     }

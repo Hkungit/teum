@@ -15,7 +15,10 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "products")
+@Table(name = "products", indexes = {
+    @Index(name = "idx_product_name", columnList = "name"),
+    @Index(name = "idx_product_stock", columnList = "stockQuantity")
+})
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

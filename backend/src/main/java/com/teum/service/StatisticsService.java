@@ -1,6 +1,7 @@
 package com.teum.service;
 
 import com.teum.model.*;
+import org.springframework.cache.annotation.Cacheable;
 import com.teum.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -66,6 +67,7 @@ public class StatisticsService {
         statisticsRepository.save(stats);
     }
 
+    @Cacheable(value = "statistics", key = "'latest'")
     public Statistics getLatestStatistics() {
         return statisticsRepository.findFirstByOrderByDateDesc();
     }
