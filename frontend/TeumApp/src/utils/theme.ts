@@ -1,4 +1,6 @@
-export const theme = {
+import { Theme } from 'react-native-elements';
+
+export const theme: Partial<Theme> = {
   colors: {
     primary: '#1890ff',
     secondary: '#f5222d',
