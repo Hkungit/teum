@@ -19,13 +19,9 @@ const mockNavigation = {
   reset: jest.fn()
 };
 
-jest.mock('@react-navigation/native', () => {
-  const actualNav = jest.requireActual('@react-navigation/native');
-  return {
-    ...actualNav,
-    useNavigation: () => mockNavigation
-  };
-});
+jest.mock('@react-navigation/native', () => ({
+  useNavigation: () => mockNavigation
+}));
 
 describe('Login Screen', () => {
   beforeEach(() => {
@@ -63,7 +59,7 @@ describe('Login Screen', () => {
         id: 1
       }
     };
-    (authService.login as jest.Mock<any, any>).mockResolvedValueOnce(mockResponse);
+    (authService.login as jest.Mock<Promise<any>, any>).mockResolvedValueOnce(mockResponse);
 
     const { getByPlaceholderText, getByText } = renderLogin();
     fireEvent.changeText(getByPlaceholderText('Username'), 'testuser');
@@ -80,7 +76,7 @@ describe('Login Screen', () => {
   });
 
   it('should handle login error', async () => {
-    (authService.login as jest.Mock).mockRejectedValueOnce(new Error('Login failed'));
+    (authService.login as jest.Mock<Promise<any>, any>).mockRejectedValueOnce(new Error('Login failed'));
 
     const { getByPlaceholderText, getByText } = renderLogin();
     fireEvent.changeText(getByPlaceholderText('Username'), 'testuser');

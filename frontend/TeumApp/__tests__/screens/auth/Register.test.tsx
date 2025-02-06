@@ -14,13 +14,9 @@ const mockNavigation = {
   goBack: jest.fn()
 };
 
-jest.mock('@react-navigation/native', () => {
-  const actualNav = jest.requireActual('@react-navigation/native');
-  return {
-    ...actualNav,
-    useNavigation: () => mockNavigation
-  };
-});
+jest.mock('@react-navigation/native', () => ({
+  useNavigation: () => mockNavigation
+}));
 
 describe('Register Screen', () => {
   beforeEach(() => {
@@ -50,7 +46,7 @@ describe('Register Screen', () => {
   });
 
   it('should handle successful registration', async () => {
-    (authService.register as jest.Mock<any, any>).mockResolvedValueOnce({});
+    (authService.register as jest.Mock<Promise<any>, any>).mockResolvedValueOnce({});
 
     const { getByPlaceholderText, getByText } = renderRegister();
     fireEvent.changeText(getByPlaceholderText('Username'), 'testuser');
@@ -73,7 +69,7 @@ describe('Register Screen', () => {
   });
 
   it('should handle registration error', async () => {
-    (authService.register as jest.Mock).mockRejectedValueOnce(new Error('Registration failed'));
+    (authService.register as jest.Mock<Promise<any>, any>).mockRejectedValueOnce(new Error('Registration failed'));
 
     const { getByPlaceholderText, getByText } = renderRegister();
     fireEvent.changeText(getByPlaceholderText('Username'), 'testuser');
