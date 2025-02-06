@@ -8,6 +8,7 @@ import { authService } from '../../../src/services/auth';
 import i18n from '../../../src/i18n/config';
 import { theme } from '../../../src/utils/theme';
 import { jest, describe, it, expect, beforeEach } from '@jest/globals';
+import { JestMockWithPromise } from '../../../src/types/test-utils';
 
 const mockNavigation = {
   navigate: jest.fn(),
@@ -46,7 +47,7 @@ describe('Register Screen', () => {
   });
 
   it('should handle successful registration', async () => {
-    (authService.register as jest.Mock<Promise<any>, any>).mockResolvedValueOnce({});
+    (authService.register as JestMockWithPromise).mockResolvedValueOnce({});
 
     const { getByPlaceholderText, getByText } = renderRegister();
     fireEvent.changeText(getByPlaceholderText('Username'), 'testuser');
@@ -69,7 +70,7 @@ describe('Register Screen', () => {
   });
 
   it('should handle registration error', async () => {
-    (authService.register as jest.Mock<Promise<any>, any>).mockRejectedValueOnce(new Error('Registration failed'));
+    (authService.register as JestMockWithPromise).mockRejectedValueOnce(new Error('Registration failed'));
 
     const { getByPlaceholderText, getByText } = renderRegister();
     fireEvent.changeText(getByPlaceholderText('Username'), 'testuser');

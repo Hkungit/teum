@@ -8,6 +8,7 @@ import { authService } from '../../../src/services/auth';
 import i18n from '../../../src/i18n/config';
 import { theme } from '../../../src/utils/theme';
 import { jest, describe, it, expect, beforeEach } from '@jest/globals';
+import { JestMockWithPromise } from '../../../src/types/test-utils';
 jest.mock('@react-native-async-storage/async-storage', () => ({
   setItem: jest.fn(),
   getItem: jest.fn(),
@@ -59,7 +60,7 @@ describe('Login Screen', () => {
         id: 1
       }
     };
-    (authService.login as jest.Mock<Promise<any>, any>).mockResolvedValueOnce(mockResponse);
+    (authService.login as JestMockWithPromise).mockResolvedValueOnce(mockResponse);
 
     const { getByPlaceholderText, getByText } = renderLogin();
     fireEvent.changeText(getByPlaceholderText('Username'), 'testuser');
@@ -76,7 +77,7 @@ describe('Login Screen', () => {
   });
 
   it('should handle login error', async () => {
-    (authService.login as jest.Mock<Promise<any>, any>).mockRejectedValueOnce(new Error('Login failed'));
+    (authService.login as JestMockWithPromise).mockRejectedValueOnce(new Error('Login failed'));
 
     const { getByPlaceholderText, getByText } = renderLogin();
     fireEvent.changeText(getByPlaceholderText('Username'), 'testuser');
