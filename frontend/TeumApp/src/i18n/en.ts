@@ -15,6 +15,9 @@ export default {
     password: 'Password',
     username: 'Username',
     firstName: 'First Name',
-    lastName: 'Last Name'
+    lastName: 'Last Name',
+    loginError: 'Login failed. Please check your credentials.',
+    registerError: 'Registration failed. Please try again.',
+    backToLogin: 'Back to Login'
   }
 };

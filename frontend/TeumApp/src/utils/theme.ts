@@ -7,20 +7,15 @@ export const theme: Partial<Theme> = {
     success: '#52c41a',
     warning: '#faad14',
     error: '#ff4d4f',
-    background: '#ffffff',
-    text: '#000000',
-    border: '#d9d9d9'
-  },
-  spacing: {
-    xs: 4,
-    sm: 8,
-    md: 16,
-    lg: 24,
-    xl: 32
+    grey0: '#000000',
+    grey5: '#d9d9d9',
+    white: '#ffffff'
   },
   Button: {
     raised: true,
-    borderRadius: 8
+    buttonStyle: {
+      borderRadius: 8
+    }
   },
   Input: {
     containerStyle: {

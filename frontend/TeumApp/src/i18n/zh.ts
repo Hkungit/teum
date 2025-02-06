@@ -15,6 +15,9 @@ export default {
     password: '密码',
     username: '用户名',
     firstName: '名',
-    lastName: '姓'
+    lastName: '姓',
+    loginError: '登录失败，请检查您的凭据。',
+    registerError: '注册失败，请重试。',
+    backToLogin: '返回登录'
   }
 };
