@@ -4,10 +4,11 @@ import { Input, Button, Text } from 'react-native-elements';
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
 import { NavigationProps } from '../../types/navigation';
-import api from '../../services/api';
+import { authService } from '../../services/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Login = () => {
+const Login = ({ route }: { route: any }) => {
+  const registered = route.params?.registered;
   const { t } = useTranslation();
   const navigation = useNavigation<NavigationProps>();
   const [username, setUsername] = useState('');
@@ -19,11 +20,16 @@ const Login = () => {
     try {
       setLoading(true);
       setError('');
-      const response = await api.post('/api/auth/login', { username, password });
+      const response = await authService.login({ username, password });
       await AsyncStorage.setItem('token', response.data.token);
-      navigation.navigate('Home');
+      await AsyncStorage.setItem('userId', response.data.id.toString());
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Home' }],
+      });
     } catch (err) {
       setError(t('auth.loginError'));
+      console.error('Login error:', err);
     } finally {
       setLoading(false);
     }
@@ -32,6 +38,9 @@ const Login = () => {
   return (
     <View style={styles.container}>
       <Text h3 style={styles.title}>{t('auth.login')}</Text>
+      {registered && (
+        <Text style={styles.success}>{t('auth.registerSuccess')}</Text>
+      )}
       <Input
         placeholder={t('auth.username')}
         value={username}
@@ -77,6 +86,11 @@ const styles = StyleSheet.create({
   },
   error: {
     color: '#ff4d4f',
+    textAlign: 'center',
+    marginBottom: 10
+  },
+  success: {
+    color: '#52c41a',
     textAlign: 'center',
     marginBottom: 10
   }

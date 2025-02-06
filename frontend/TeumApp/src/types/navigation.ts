@@ -2,7 +2,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 
 export type RootStackParamList = {
   Home: undefined;
-  Login: undefined;
+  Login: { registered?: boolean };
   Register: undefined;
 };
 

@@ -4,7 +4,7 @@ import { Input, Button, Text } from 'react-native-elements';
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
 import { NavigationProps } from '../../types/navigation';
-import api from '../../services/api';
+import { authService } from '../../services/auth';
 
 const Register = () => {
   const { t } = useTranslation();
@@ -23,10 +23,11 @@ const Register = () => {
     try {
       setLoading(true);
       setError('');
-      await api.post('/api/auth/register', form);
-      navigation.navigate('Login');
+      await authService.register(form);
+      navigation.navigate('Login', { registered: true } as any);
     } catch (err) {
       setError(t('auth.registerError'));
+      console.error('Registration error:', err);
     } finally {
       setLoading(false);
     }

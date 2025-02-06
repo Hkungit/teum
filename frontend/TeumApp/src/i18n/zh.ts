@@ -18,6 +18,7 @@ export default {
     lastName: '姓',
     loginError: '登录失败，请检查您的凭据。',
     registerError: '注册失败，请重试。',
+    registerSuccess: '注册成功！请登录。',
     backToLogin: '返回登录'
   }
 };

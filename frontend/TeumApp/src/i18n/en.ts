@@ -18,6 +18,7 @@ export default {
     lastName: 'Last Name',
     loginError: 'Login failed. Please check your credentials.',
     registerError: 'Registration failed. Please try again.',
+    registerSuccess: 'Registration successful! Please login.',
     backToLogin: 'Back to Login'
   }
 };
