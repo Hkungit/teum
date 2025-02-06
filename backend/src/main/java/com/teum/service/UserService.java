@@ -32,6 +32,14 @@ public class UserService {
             .orElseThrow(() -> new ResourceNotFoundException("User not found with username: " + username));
     }
 
+    public boolean existsByUsername(String username) {
+        return userRepository.existsByUsername(username);
+    }
+
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
     @Transactional
     public User updateUser(Long id, User userDetails) {
         User user = getUserById(id);
